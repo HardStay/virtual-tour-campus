@@ -7,8 +7,6 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
-import VirtualTour360 from "../components/VirtualTour360";
-import tour360Img from "../assets/foto360/Gedung B.jpg";
 
 export default function BuildingDetail() {
   const { id } = useParams();
@@ -35,14 +33,6 @@ export default function BuildingDetail() {
       <section className="about-section">
         <h2>About :</h2>
         <p>{building.about}</p>
-      </section>
-
-      {/* Virtual Tour 360 Section */}
-      <section className="virtualtour-section">
-        <h2 style={{ textAlign: "center", margin: "2rem 0 1rem 0" }}>
-          Virtual Tour 360
-        </h2>
-        <VirtualTour360 image={tour360Img} />
       </section>
 
       {/* Swiper Gallery Section */}
