@@ -137,6 +137,31 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* Lower opacity for slides that are not the center */
+.swiper-slide {
+  transition: opacity 0.3s, filter 0.3s;
+}
+
+.swiper-slide-prev,
+.swiper-slide-next {
+  opacity: 0.6;
+  filter: blur(0.5px);
+}
+
+.swiper-slide:not(.swiper-slide-active):not(.swiper-slide-prev):not(
+    .swiper-slide-next
+  ) {
+  opacity: 0.3;
+  filter: blur(1px);
+}
+
+/* Ensure single-slide Swiper is always fully visible */
+.swiper-wrapper:only-child .swiper-slide,
+.swiper-wrapper .swiper-slide:only-child {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
 @media (max-width: 700px) {
   .features-section {
     flex-direction: column;

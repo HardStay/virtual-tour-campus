@@ -7,10 +7,12 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
+import { useState } from "react";
 
 export default function BuildingDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [videoOpen, setVideoOpen] = useState(false);
 
   // Find the building by id (e.g., 'gedung-a')
   const building = buildingContent.find(
@@ -57,7 +59,7 @@ export default function BuildingDetail() {
               loop={true}
               style={{ paddingBottom: 30 }}
             >
-              {building.spaces.concat(building.spaces).map((space, idx) => (
+              {building.spaces.map((space, idx) => (
                 <SwiperSlide
                   key={space.name + idx}
                   style={{
@@ -101,11 +103,123 @@ export default function BuildingDetail() {
           <img src={building.virtualTourImages[0].src} alt="Virtual Tour" />
           <div className="feature-label">Virtual Tour</div>
         </div>
-        <div className="feature-card">
-          <img src={building.videoPanduanImg} alt="Video Panduan" />
-          <div className="feature-label">Video Panduan</div>
-        </div>
+        {/* Only show video if available */}
+        {building.videoPanduan && building.videoPanduan !== "" && (
+          <div
+            className="feature-card"
+            style={{ cursor: "pointer", position: "relative" }}
+            onClick={() => setVideoOpen(true)}
+          >
+            {/* Always show a static thumbnail with play icon overlay */}
+            <img
+              src={building.headerImg}
+              alt="Video Panduan Thumbnail"
+              style={{
+                width: "100%",
+                height: "100px",
+                objectFit: "cover",
+                borderRadius: "10px",
+                marginBottom: "0.5rem",
+                filter: "brightness(0.7)",
+              }}
+            />
+            {/* Play icon overlay */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                pointerEvents: "none",
+              }}
+            >
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.5)" />
+                <polygon points="20,16 34,24 20,32" fill="#fff" />
+              </svg>
+            </div>
+            <div className="feature-label">Video Panduan</div>
+          </div>
+        )}
       </section>
+      {/* Video Modal Popup */}
+      {videoOpen &&
+        building.videoPanduan &&
+        building.videoPanduan.match(/\.(mp4|mov|webm)$/i) && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              background: "rgba(0,0,0,0.7)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 1000,
+            }}
+            onClick={() => setVideoOpen(false)}
+          >
+            <div
+              style={{
+                background: "#fff",
+                borderRadius: 16,
+                padding: 16,
+                maxWidth: "90vw",
+                maxHeight: "80vh",
+                boxShadow: "0 4px 32px rgba(0,0,0,0.25)",
+                position: "relative",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setVideoOpen(false)}
+                style={{
+                  position: "absolute",
+                  top: 8,
+                  right: 8,
+                  background: "#fff",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: 32,
+                  height: 32,
+                  fontSize: 20,
+                  cursor: "pointer",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
+                  zIndex: 10,
+                }}
+                aria-label="Close video"
+              >
+                ×
+              </button>
+              <video
+                controls
+                autoPlay
+                style={{
+                  width: "70vw",
+                  maxWidth: 700,
+                  maxHeight: "70vh",
+                  borderRadius: 12,
+                  background: "#000",
+                }}
+              >
+                <source src={building.videoPanduan} />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        )}
     </div>
   );
 }

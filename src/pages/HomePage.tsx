@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import gedungA from "../assets/fotoGedung/gedungA.jpg";
-import gedungB from "../assets/fotoGedung/gedungB.jpg";
-import gedungC from "../assets/fotoGedung/gedungC.jpg";
+import gedungA from "../assets/fotoGedung/Gedung A.jpg";
+import gedungB from "../assets/fotoGedung/Gedung B(1).jpg";
+import gedungC from "../assets/fotoGedung/Gedung C.jpg";
 import danauFEB from "../assets/fotoGedung/Danau FEB.jpg";
-import parkiran from "../assets/fotoGedung/Parkiran.jpg";
-import tulisanFEB from "../assets/fotoGedung/Tulisan FEB.jpg";
+import parkiran from "../assets/fotoGedung/Parkiran Motor.jpg";
+import tulisanFEB from "../assets/fotoGedung/Tulisan FEB .jpg";
 
 // Swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
