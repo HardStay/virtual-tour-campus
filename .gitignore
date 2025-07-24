@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-videoGuide/*
+src/assets/videoGuide/*
 node_modules
 dist
 dist-ssr
