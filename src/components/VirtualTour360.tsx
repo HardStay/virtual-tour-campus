@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import type { Viewer } from "photo-sphere-viewer";
 import type {
@@ -6,19 +6,19 @@ import type {
   Marker,
 } from "photo-sphere-viewer/dist/plugins/markers";
 
-// Hotspot type
 export type Hotspot = {
-  x: number; // longitude (0-1, 0=left, 1=right)
-  y: number; // latitude (0-1, 0=top, 1=bottom)
-  target: number; // index of the next panorama
+  x: number;
+  y: number;
+  target: number;
   label: string;
+  targetBuilding?: string;
 };
 
 type Props = {
   image: string;
   height?: number;
   hotspots?: Hotspot[];
-  onHotspotClick?: (target: number) => void;
+  onHotspotClick?: (hotspot: Hotspot) => void;
 };
 
 const VirtualTour360: React.FC<Props> = ({
@@ -31,14 +31,39 @@ const VirtualTour360: React.FC<Props> = ({
   const psvInstance = useRef<Viewer | null>(null);
   const markersPluginRef = useRef<MarkersPlugin | null>(null);
 
-  // Initialize viewer once
+  const updateMarkers = useCallback(() => {
+    const plugin = markersPluginRef.current;
+    if (!plugin) return;
+
+    plugin.setMarkers(
+      hotspots.map((hotspot, i) => ({
+        id: `hotspot-${i}`,
+        longitude: hotspot.x * 2 * Math.PI,
+        latitude: (hotspot.y - 0.5) * Math.PI,
+        html: `<div style="
+                font-size:2rem;
+                color:#68da51;
+                cursor:pointer;
+                text-shadow:0 0 10px rgba(104,218,81,0.8);
+              ">➔</div>`,
+        tooltip: hotspot.label,
+        data: { hotspot },
+        width: 32,
+        height: 32,
+        anchor: "bottom center",
+      }))
+    );
+  }, [hotspots]);
+
   useEffect(() => {
     let isMounted = true;
+
     Promise.all([
       import("photo-sphere-viewer"),
       import("photo-sphere-viewer/dist/plugins/markers"),
     ]).then(([PSV, Markers]) => {
       if (!isMounted || !viewerRef.current) return;
+
       psvInstance.current = new PSV.Viewer({
         container: viewerRef.current,
         panorama: image,
@@ -46,71 +71,45 @@ const VirtualTour360: React.FC<Props> = ({
         defaultLong: Math.PI,
         plugins: [Markers.MarkersPlugin],
       });
-      markersPluginRef.current =
-        psvInstance.current.getPlugin(Markers.MarkersPlugin) || null;
-      if (markersPluginRef.current && hotspots.length > 0) {
-        markersPluginRef.current.setMarkers(
-          hotspots.map((h, i) => ({
-            id: `hotspot-${i}`,
-            longitude: h.x * 2 * Math.PI,
-            latitude: (h.y - 0.5) * Math.PI,
-            image: undefined,
-            html: `<div style='font-size:2rem; color:#68da51;'>➔</div>`,
-            tooltip: h.label,
-            data: { target: h.target },
-            width: 32,
-            height: 32,
-            anchor: "bottom center",
-          }))
-        );
-        markersPluginRef.current.on(
-          "select-marker",
-          (_e: unknown, marker: Marker) => {
-            if (
-              onHotspotClick &&
-              marker.data &&
-              typeof marker.data.target === "number"
-            ) {
-              onHotspotClick(marker.data.target);
-            }
+
+      // normalize undefined to null
+      const plugin: MarkersPlugin | null =
+        psvInstance.current.getPlugin(Markers.MarkersPlugin) ?? null;
+      markersPluginRef.current = plugin;
+
+      if (plugin && hotspots.length > 0) {
+        updateMarkers();
+      }
+
+      if (plugin) {
+        plugin.on("select-marker", (_e: unknown, marker: Marker) => {
+          if (marker.data?.hotspot && onHotspotClick) {
+            onHotspotClick(marker.data.hotspot);
           }
-        );
+        });
       }
     });
+
     return () => {
       isMounted = false;
-      if (psvInstance.current) {
-        psvInstance.current.destroy();
-        psvInstance.current = null;
-      }
+      psvInstance.current?.destroy();
+      psvInstance.current = null;
       markersPluginRef.current = null;
     };
-    // Only run on mount/unmount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Update panorama and markers when image or hotspots change
   useEffect(() => {
+    const plugin = markersPluginRef.current;
     if (psvInstance.current) {
-      psvInstance.current.setPanorama(image);
+      psvInstance.current.setPanorama(image, {
+        transition: 1000, // 1 second smooth transition
+      });
     }
-    if (markersPluginRef.current) {
-      markersPluginRef.current.setMarkers(
-        hotspots.map((h, i) => ({
-          id: `hotspot-${i}`,
-          longitude: h.x * 2 * Math.PI,
-          latitude: (h.y - 0.5) * Math.PI,
-          image: undefined,
-          html: `<div style='font-size:2rem; color:#68da51;'>➔</div>`,
-          tooltip: h.label,
-          data: { target: h.target },
-          width: 32,
-          height: 32,
-          anchor: "bottom center",
-        }))
-      );
+    if (plugin) {
+      updateMarkers();
     }
-  }, [image, hotspots]);
+  }, [image, updateMarkers]);
 
   return (
     <div
@@ -120,6 +119,7 @@ const VirtualTour360: React.FC<Props> = ({
         height,
         borderRadius: "16px",
         overflow: "hidden",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
       }}
     />
   );

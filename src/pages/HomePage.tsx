@@ -67,7 +67,24 @@ export default function HomePage() {
                   justifyContent: "center",
                 }}
               >
-                <div className="carousel-card">
+                <div
+                  className="carousel-card"
+                  key={img.title}
+                  onClick={() => handleBuildingClick(img.title)}
+                  style={{
+                    cursor: "pointer",
+                    background: "rgba(255,255,255,0.85)",
+                    borderRadius: "16px",
+                    boxShadow: "0 2px 12px rgba(104,218,81,0.10)",
+                    transition: "transform 0.15s",
+                  }}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.transform = "scale(1.05)")
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.transform = "scale(1)")
+                  }
+                >
                   <img src={img.src} alt={img.title} />
                   <div className="carousel-card-title">{img.title}</div>
                 </div>

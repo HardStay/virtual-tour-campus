@@ -4,6 +4,7 @@ import headerC from "../assets/fotoGedung/Gedung C.jpg";
 import headerD from "../assets/fotoGedung/Gedung IUP(2).jpg";
 import headerE from "../assets/fotoGedung/Lab KWU.jpg";
 import headerF from "../assets/fotoGedung/Dekanat(2).jpg";
+import headerG from "../assets/fotoGedung/Tulisan FEB.jpg";
 import spaceA1 from "../assets/foto360/Gedung A - Lobby Manajemen .jpg";
 import spaceB1 from "../assets/foto360/Gedung B - Lobby Akuntansi .jpg";
 import spaceC1 from "../assets/foto360/Gedung C - Lobby Ilmu Ekonomi.jpg";
@@ -18,11 +19,19 @@ import spaceD4 from "../assets/foto360/Gedung IUP - Lab Komputer.jpg";
 import spaceE1 from "../assets/foto360/Gedung KWU.jpg";
 import spaceE2 from "../assets/foto360/Gedung KWU - Inspiration Space.jpg";
 import spaceF1 from "../assets/foto360/Dekanat - Lobby .jpg";
+import spaceG1 from "../assets/foto360/Parkiran.jpg";
+import spaceG2 from "../assets/foto360/Danau FEB.jpg";
+import spaceG3 from "../assets/foto360/Lapangan Olahraga.jpg";
+import spaceG4 from "../assets/foto360/Pakardo.jpg";
+import spaceG5 from "../assets/foto360/Masjid.jpg";
+import spaceG6 from "../assets/foto360/Masjid Tampak Bawah.jpg";
+import spaceG7 from "../assets/foto360/Dome.jpg";
 import videoA from "../assets/videoGuide/Gedung A.mov";
 import videoB from "../assets/videoGuide/Gedung B.mov";
 import videoC from "../assets/videoGuide/Gedung C.mov";
 import videoD from "../assets/videoGuide/Gedung IUP.mov";
 import videoE from "../assets/videoGuide/Gedung Lab KWU.mov";
+import videoF from "../assets/videoGuide/Fasilitas FEB.mov";
 // 360 images
 // import tour360A1 from "../assets/foto360/Gedung A - Lobby Manajemen .jpg";
 // import tour360B1 from "../assets/foto360/Gedung B - Lobby Akuntansi .jpg";
@@ -40,10 +49,25 @@ export const buildingContent = [
       {
         src: spaceA1,
         label: "Lobby Manajemen Gedung A",
-        hotspots: [{ x: 0.7, y: 0.5, target: 1, label: "Go to Parkiran" }],
+        hotspots: [
+          {
+            x: 0.7,
+            y: 0.5,
+            target: 0,
+            targetBuilding: "Gedung Dekanat",
+            label: "Lobby Dekanat",
+          },
+          {
+            x: 0.3,
+            y: 0.5,
+            target: 0,
+            targetBuilding: "Gedung B",
+            label: "Lobby Akuntansi - Gedung B",
+          },
+        ],
       },
     ],
-    videoPanduan : videoA,
+    videoPanduan: videoA,
   },
   {
     name: "Gedung B",
@@ -54,11 +78,26 @@ export const buildingContent = [
     virtualTourImages: [
       {
         src: spaceB1,
-        label: "Lobby Akuntansi Gedung B",
-        hotspots: [{ x: 0.7, y: 0.5, target: 1, label: "Go to Masjid" }],
+        label: "Lobby Akuntansi - Gedung B",
+        hotspots: [
+          {
+            x: 0.7,
+            y: 0.5,
+            target: 0,
+            targetBuilding: "Gedung A",
+            label: "Lobby Manajemen Gedung A",
+          },
+          {
+            x: 0.3,
+            y: 0.5,
+            target: 0,
+            targetBuilding: "Gedung C",
+            label: "Lobby Ilmu Ekonomi - Gedung C",
+          },
+        ],
       },
     ],
-    videoPanduan : videoB,
+    videoPanduan: videoB,
   },
   {
     name: "Gedung C",
@@ -66,40 +105,77 @@ export const buildingContent = [
     about:
       "Gedung C adalah pusat pertemuan, laboratorium, dan memiliki kantin serta area selasar yang nyaman.",
     spaces: [
-      { name: "Lobby Ilmu Ekonomi", img: spaceC1 },
+      { name: "Lobby Ilmu Ekonomi Gedung C", img: spaceC1 },
       { name: "Hall Gedung C", img: spaceC2 },
-      { name: "Kelas A, B, C", img: spaceC3 },
-      { name: "Kantin", img: spaceC4 },
-      { name: "Selasar", img: spaceC5 },
+      { name: "Kelas A, B, C - Gedung C", img: spaceC3 },
+      { name: "Kantin Gedung C", img: spaceC4 },
+      { name: "Selasar Gedung C", img: spaceC5 },
     ],
     virtualTourImages: [
       {
         src: spaceC1,
         label: "Lobby Ilmu Ekonomi - Gedung C",
-        hotspots: [{ x: 0.7, y: 0.5, target: 1, label: "Ke Hall Gedung C" }],
+        hotspots: [
+          {
+            x: 0.7,
+            y: 0.5,
+            target: 0,
+            targetBuilding: "Gedung B",
+            label: "Lobby Akuntansi - Gedung B",
+          },
+          { x: 0.3, y: 0.5, target: 1, label: "Hall Gedung C" },
+        ],
       },
       {
         src: spaceC2,
         label: "Hall Gedung C",
-        hotspots: [{ x: 0.3, y: 0.5, target: 2, label: "Ke Ruang Kelas A, B, C - Gedung C" }],
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 0, label: "Lobby Ilmu Ekonomi - Gedung C" },
+          {
+            x: 0.3,
+            y: 0.5,
+            target: 2,
+            label: "Ruang Kelas A, B, C - Gedung C",
+          },
+        ],
       },
       {
         src: spaceC3,
         label: "Ruang Kelas A, B, C - Gedung C",
-        hotspots: [{ x: 0.5, y: 0.5, target: 3, label: "Kantin Gedung C" }],
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 1, label: "Hall Gedung C" },
+          { x: 0.3, y: 0.5, target: 3, label: "Kantin Gedung C" },
+        ],
       },
       {
         src: spaceC4,
         label: "Kantin Gedung C",
-        hotspots: [{ x: 0.5, y: 0.5, target: 4, label: "Selasar Gedung C" }],
+        hotspots: [
+          {
+            x: 0.7,
+            y: 0.5,
+            target: 2,
+            label: "Ruang Kelas A, B, C - Gedung C",
+          },
+          { x: 0.3, y: 0.5, target: 4, label: "Selasar Gedung C" },
+        ],
       },
       {
         src: spaceC5,
         label: "Selasar Gedung C",
-        hotspots: [{ x: 0.5, y: 0.5, target: 0, label: "Back to Lobby" }],
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 3, label: "Kantin Gedung C" },
+          {
+            x: 0.3,
+            y: 0.5,
+            target: 0,
+            targetBuilding: "Gedung IUP",
+            label: "Perpustakaan Gedung IUP",
+          },
+        ],
       },
     ],
-    videoPanduan : videoC,
+    videoPanduan: videoC,
   },
   {
     name: "Gedung IUP",
@@ -116,31 +192,49 @@ export const buildingContent = [
       {
         src: spaceD1,
         label: "Perpustakaan Gedung IUP",
-        hotspots: [{ x: 0.7, y: 0.5, target: 1, label: "Go to Digilab" }],
+        hotspots: [
+          {
+            x: 0.7,
+            y: 0.5,
+            target: 4,
+            targetBuilding: "Gedung C",
+            label: "Selasar Gedung C",
+          },
+          { x: 0.3, y: 0.5, target: 1, label: "Digilab Gedung IUP" },
+        ],
       },
       {
         src: spaceD2,
         label: "Digilab Gedung IUP",
         hotspots: [
-          { x: 0.3, y: 0.5, target: 0, label: "Back to Perpustakaan" },
+          { x: 0.7, y: 0.5, target: 0, label: "Perpustakaan Gedung IUP" },
+          { x: 0.3, y: 0.5, target: 2, label: "Bloomberg Gedung IUP" },
         ],
       },
       {
         src: spaceD3,
         label: "Bloomberg Room Gedung IUP",
         hotspots: [
-          { x: 0.5, y: 0.5, target: 0, label: "Back to Perpustakaan" },
+          { x: 0.7, y: 0.5, target: 1, label: "Digilab Gedung IUP" },
+          { x: 0.3, y: 0.5, target: 3, label: "Lab Komputer Gedung IUP" },
         ],
       },
       {
         src: spaceD4,
         label: "Lab Komputer Gedung IUP",
         hotspots: [
-          { x: 0.5, y: 0.5, target: 0, label: "Back to Perpustakaan" },
+          { x: 0.7, y: 0.5, target: 2, label: "Bloomberg Room Gedung IUP" },
+          {
+            x: 0.3,
+            y: 0.5,
+            target: 0,
+            targetBuilding: "Gedung KWU",
+            label: "Auditorium Lab KWU",
+          },
         ],
       },
     ],
-    videoPanduan : videoD,
+    videoPanduan: videoD,
   },
   {
     name: "Gedung KWU",
@@ -156,16 +250,37 @@ export const buildingContent = [
         src: spaceE1,
         label: "Auditorium Lab KWU",
         hotspots: [
-          { x: 0.7, y: 0.5, target: 1, label: "Go to Inspiration Space" },
+          {
+            x: 0.7,
+            y: 0.5,
+            target: 3,
+            targetBuilding: "Gedung IUP",
+            label: "Lab Komputer Gedung IUP",
+          },
+          {
+            x: 0.3,
+            y: 0.5,
+            target: 1,
+            label: "The Inspiration Space KWU",
+          },
         ],
       },
       {
         src: spaceE2,
         label: "The Inspiration Space KWU",
-        hotspots: [{ x: 0.3, y: 0.5, target: 0, label: "Back to Auditorium" }],
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 0, label: "Auditorium Lab KWU" },
+          {
+            x: 0.3,
+            y: 0.5,
+            target: 0,
+            targetBuilding: "Gedung Dekanat",
+            label: "Lobby Dekanat",
+          },
+        ],
       },
     ],
-    videoPanduan : videoE,
+    videoPanduan: videoE,
   },
   {
     name: "Gedung Dekanat",
@@ -177,9 +292,107 @@ export const buildingContent = [
       {
         src: spaceF1,
         label: "Lobby Dekanat",
-        hotspots: [{ x: 0.7, y: 0.5, target: 1, label: "Go to KWU" }],
+        hotspots: [
+          {
+            x: 0.7,
+            y: 0.5,
+            target: 1,
+            targetBuilding: "Gedung KWU",
+            label: "The Inspiration Space KWU",
+          },
+          {
+            x: 0.3,
+            y: 0.5,
+            target: 0,
+            targetBuilding: "Gedung A",
+            label: "Lobby Manajemen Gedung A",
+          },
+        ],
       },
     ],
-    videoPanduan : "",
+    videoPanduan: "",
+  },
+  {
+    name: "Fasilitas",
+    headerImg: headerG,
+    about:
+      "Fasilitas FEB adalah fasilitas yang ada di kampus FEB, seperti parkiran, danau FEB, lapangan olahraga, pakardo, masjid, dan dome.",
+    spaces: [
+      { name: "Parkiran", img: spaceG1 },
+      { name: "Danau FEB", img: spaceG2 },
+      { name: "Lapangan Olahraga", img: spaceG3 },
+      { name: "Pakardo", img: spaceG4 },
+      { name: "Masjid", img: spaceG5 },
+      { name: "Dome", img: spaceG7 },
+    ],
+    virtualTourImages: [
+      {
+        src: spaceG1,
+        label: "Parkiran",
+        hotspots: [
+          {
+            x: 0.7,
+            y: 0.5,
+            target: 6,
+            label: "Dome",
+          },
+          {
+            x: 0.3,
+            y: 0.5,
+            target: 1,
+            label: "Danau FEB",
+          },
+        ],
+      },
+      {
+        src: spaceG2,
+        label: "Danau FEB",
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 0, label: "Parkiran" },
+          { x: 0.3, y: 0.5, target: 2, label: "Lapangan Olahraga" },
+        ],
+      },
+      {
+        src: spaceG3,
+        label: "Lapangan Olahraga",
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 1, label: "Danau FEB" },
+          { x: 0.3, y: 0.5, target: 3, label: "Pakardo" },
+        ],
+      },
+      {
+        src: spaceG4,
+        label: "Pakardo",
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 2, label: "Lapangan Olahraga" },
+          { x: 0.3, y: 0.5, target: 4, label: "Masjid" },
+        ],
+      },
+      {
+        src: spaceG5,
+        label: "Masjid",
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 3, label: "Pakardo" },
+          { x: 0.3, y: 0.5, target: 5, label: "Masjid Tampak Bawah" },
+        ],
+      },
+      {
+        src: spaceG6,
+        label: "Masjid Tampak Bawah",
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 4, label: "Masjid" },
+          { x: 0.3, y: 0.5, target: 6, label: "Dome" },
+        ],
+      },
+      {
+        src: spaceG7,
+        label: "Dome",
+        hotspots: [
+          { x: 0.7, y: 0.5, target: 5, label: "Masjid Tampak Bawah" },
+          { x: 0.3, y: 0.5, target: 0, label: "Parkiran" },
+        ],
+      },
+    ],
+    videoPanduan: videoF,
   },
 ];
