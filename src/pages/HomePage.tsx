@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom";
 import gedungA from "../assets/fotoGedung/Gedung A.jpg";
 import gedungB from "../assets/fotoGedung/Gedung B(1).jpg";
 import gedungC from "../assets/fotoGedung/Gedung C.jpg";
+import gedungIUP from "../assets/fotoGedung/Gedung IUP(1).jpg";
+import gedungKWU from "../assets/fotoGedung/Lab KWU.jpg";
+import gedungDekanat from "../assets/fotoGedung/Dekanat(3).jpg";
+import gedungPKM from "../assets/fotoGedung/Gedung PKM ( Fasilitas ).jpg";
 import danauFEB from "../assets/fotoGedung/Danau FEB.jpg";
 import parkiran from "../assets/fotoGedung/Parkiran Motor.jpg";
 import tulisanFEB from "../assets/fotoGedung/Tulisan FEB .jpg";
@@ -15,12 +19,16 @@ const buildings = [
   { name: "Gedung A", image: gedungA },
   { name: "Gedung B", image: gedungB },
   { name: "Gedung C", image: gedungC },
+  { name: "Gedung IUP", image: gedungIUP },
+  { name: "Gedung KWU", image: gedungKWU },
+  { name: "Gedung Dekanat", image: gedungDekanat },
+  { name: "Gedung PKM", image: gedungPKM },
 ];
 
 const baseImages = [
   { src: danauFEB, title: "Fasilitas" },
-  { src: parkiran, title: "Parkiran" },
-  { src: tulisanFEB, title: "Tulisan FEB" },
+  { src: parkiran, title: "About FEB" },
+  { src: tulisanFEB, title: "Ormawa" },
 ];
 
 // Duplicate the array to enable true loop with 3 unique images

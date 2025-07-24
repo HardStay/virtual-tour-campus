@@ -5,6 +5,7 @@ import headerD from "../assets/fotoGedung/Gedung IUP(2).jpg";
 import headerE from "../assets/fotoGedung/Lab KWU.jpg";
 import headerF from "../assets/fotoGedung/Dekanat(2).jpg";
 import headerG from "../assets/fotoGedung/Tulisan FEB.jpg";
+import headerH from "../assets/fotoGedung/Gedung PKM ( Fasilitas ).jpg";
 import spaceA1 from "../assets/foto360/Gedung A - Lobby Manajemen .jpg";
 import spaceB1 from "../assets/foto360/Gedung B - Lobby Akuntansi .jpg";
 import spaceC1 from "../assets/foto360/Gedung C - Lobby Ilmu Ekonomi.jpg";
@@ -26,12 +27,18 @@ import spaceG4 from "../assets/foto360/Pakardo.jpg";
 import spaceG5 from "../assets/foto360/Masjid.jpg";
 import spaceG6 from "../assets/foto360/Masjid Tampak Bawah.jpg";
 import spaceG7 from "../assets/foto360/Dome.jpg";
-import videoA from "../assets/videoGuide/Gedung A.mov";
-import videoB from "../assets/videoGuide/Gedung B.mov";
-import videoC from "../assets/videoGuide/Gedung C.mov";
-import videoD from "../assets/videoGuide/Gedung IUP.mov";
-import videoE from "../assets/videoGuide/Gedung Lab KWU.mov";
-import videoF from "../assets/videoGuide/Fasilitas FEB.mov";
+const videoA =
+  "https://video-guide-bucket.s3.ap-southeast-2.amazonaws.com/Gedung+A.mp4";
+const videoB =
+  "https://video-guide-bucket.s3.ap-southeast-2.amazonaws.com/Gedung+B.mp4";
+const videoC =
+  "https://video-guide-bucket.s3.ap-southeast-2.amazonaws.com/Gedung+C.mp4";
+const videoD =
+  "https://video-guide-bucket.s3.ap-southeast-2.amazonaws.com/Gedung+IUP.mp4";
+const videoE =
+  "https://video-guide-bucket.s3.ap-southeast-2.amazonaws.com/Gedung+Lab+KWU.mp4";
+const videoF =
+  "https://video-guide-bucket.s3.ap-southeast-2.amazonaws.com/Fasilitas+FEB.mp4";
 // 360 images
 // import tour360A1 from "../assets/foto360/Gedung A - Lobby Manajemen .jpg";
 // import tour360B1 from "../assets/foto360/Gedung B - Lobby Akuntansi .jpg";
@@ -394,5 +401,14 @@ export const buildingContent = [
       },
     ],
     videoPanduan: videoF,
+  },
+  {
+    name: "Gedung PKM",
+    headerImg: headerH,
+    about:
+      "Gedung PKM adalah pusat kegiatan program mahasiswa, dilengkapi dengan fasilitas yang membantu mahasiswa dalam mengembangkan diri.",
+    spaces: [],
+    virtualTourImages: [],
+    videoPanduan: "",
   },
 ];

@@ -50,8 +50,6 @@ export default function VirtualTourPage() {
 
   // Handle hotspot click for cross-building navigation
   function handleHotspotClick(hotspot: Hotspot) {
-    console.log("Hotspot clicked:", hotspot);
-
     if (hotspot.targetBuilding) {
       // Cross-building navigation
       const targetBuilding = buildingContent.find(
@@ -61,10 +59,6 @@ export default function VirtualTourPage() {
       if (targetBuilding) {
         const targetSlug = targetBuilding.name.toLowerCase().replace(/ /g, "-");
         const targetImageIndex = hotspot.target || 0;
-
-        console.log(
-          `Navigating to building: ${targetSlug}, image: ${targetImageIndex}`
-        );
 
         // Update the URL and navigate to the new building
         navigate(
@@ -81,7 +75,6 @@ export default function VirtualTourPage() {
     } else {
       // Internal navigation within the same building
       const targetImageIndex = hotspot.target;
-      console.log(`Internal navigation to image: ${targetImageIndex}`);
 
       // Validate target index
       if (targetImageIndex >= 0 && targetImageIndex < images.length) {
@@ -107,18 +100,6 @@ export default function VirtualTourPage() {
   }
 
   if (!actualBuilding) return <div>Building not found</div>;
-
-  // Debug log for state/prop flow
-  console.log("VirtualTourPage:", {
-    currentBuildingId,
-    current,
-    image: images[current]?.src,
-    buildingName: actualBuilding.name,
-    totalImages: images.length,
-    hotspots: images[current]?.hotspots,
-    id,
-    location: location.pathname + location.search,
-  });
 
   return (
     <div

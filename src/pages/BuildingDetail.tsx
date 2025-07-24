@@ -37,71 +37,79 @@ export default function BuildingDetail() {
       </section>
 
       {/* Swiper Gallery Section */}
-      <section className="gallery-section">
-        <div
-          style={{ width: "100%", display: "flex", justifyContent: "center" }}
-        >
-          <div style={{ position: "relative", width: "100%", maxWidth: 1100 }}>
-            <Swiper
-              modules={[Navigation, EffectCoverflow]}
-              navigation
-              effect="coverflow"
-              coverflowEffect={{
-                rotate: 0,
-                stretch: 0,
-                depth: 200,
-                modifier: 2,
-                slideShadows: false,
-              }}
-              centeredSlides={true}
-              slidesPerView={2.2}
-              loop={true}
-              style={{ paddingBottom: 30 }}
+      {building.spaces && building.spaces.length > 0 && (
+        <section className="gallery-section">
+          <div
+            style={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
+            <div
+              style={{ position: "relative", width: "100%", maxWidth: 1100 }}
             >
-              {building.spaces.map((space, idx) => (
-                <SwiperSlide
-                  key={space.name + idx}
-                  style={{
-                    width: 400,
-                    height: 250,
-                    maxWidth: "95vw",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    className="gallery-card"
-                    style={{ width: "100%", height: "100%" }}
+              <Swiper
+                modules={[Navigation, EffectCoverflow]}
+                navigation
+                effect="coverflow"
+                coverflowEffect={{
+                  rotate: 0,
+                  stretch: 0,
+                  depth: 200,
+                  modifier: 2,
+                  slideShadows: false,
+                }}
+                centeredSlides={true}
+                slidesPerView={2.2}
+                loop={true}
+                style={{ paddingBottom: 30 }}
+              >
+                {building.spaces.map((space, idx) => (
+                  <SwiperSlide
+                    key={space.name + idx}
+                    style={{
+                      width: 400,
+                      height: 250,
+                      maxWidth: "95vw",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                   >
-                    <img
-                      src={space.img}
-                      alt={space.name}
-                      style={{
-                        width: "100%",
-                        height: "200px",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <div className="gallery-label">{space.name}</div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                    <div
+                      className="gallery-card"
+                      style={{ width: "100%", height: "100%" }}
+                    >
+                      <img
+                        src={space.img}
+                        alt={space.name}
+                        style={{
+                          width: "100%",
+                          height: "200px",
+                          objectFit: "cover",
+                        }}
+                      />
+                      <div className="gallery-label">{space.name}</div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Feature Cards */}
       <section className="features-section">
-        <div
-          className="feature-card"
-          style={{ cursor: "pointer" }}
-          onClick={() => navigate(`/building/${buildingId}/virtual-tour`)}
-        >
-          <img src={building.virtualTourImages[0].src} alt="Virtual Tour" />
-          <div className="feature-label">Virtual Tour</div>
-        </div>
+        {/* Only show Virtual Tour if images exist */}
+        {building.virtualTourImages &&
+          building.virtualTourImages.length > 0 && (
+            <div
+              className="feature-card"
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate(`/building/${buildingId}/virtual-tour`)}
+            >
+              <img src={building.virtualTourImages[0].src} alt="Virtual Tour" />
+              <div className="feature-label">Virtual Tour</div>
+            </div>
+          )}
         {/* Only show video if available */}
         {building.videoPanduan && building.videoPanduan !== "" && (
           <div
@@ -213,7 +221,7 @@ export default function BuildingDetail() {
                   background: "#000",
                 }}
               >
-                <source src={building.videoPanduan} />
+                <source src={building.videoPanduan} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
