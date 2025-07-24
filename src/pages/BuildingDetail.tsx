@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { buildingContent } from "../components/buildingContent";
 import "../BuildingDetail.css";
-// Swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import "swiper/css";

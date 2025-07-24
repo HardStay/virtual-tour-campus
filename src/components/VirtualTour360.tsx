@@ -103,7 +103,7 @@ const VirtualTour360: React.FC<Props> = ({
     const plugin = markersPluginRef.current;
     if (psvInstance.current) {
       psvInstance.current.setPanorama(image, {
-        transition: 1000, // 1 second smooth transition
+        transition: 1000,
       });
     }
     if (plugin) {

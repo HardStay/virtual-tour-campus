@@ -5,8 +5,6 @@ import gedungC from "../assets/fotoGedung/Gedung C.jpg";
 import danauFEB from "../assets/fotoGedung/Danau FEB.jpg";
 import parkiran from "../assets/fotoGedung/Parkiran Motor.jpg";
 import tulisanFEB from "../assets/fotoGedung/Tulisan FEB .jpg";
-
-// Swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import "swiper/css";
